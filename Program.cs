@@ -47,6 +47,19 @@ BO_ 1020 GearBoxInfo: 1 GearBox
 
             DBCFile file = new DBCFile(fileContent);
             file.Print();
+
+
+            Console.WriteLine("-------------------------------------------");
+
+            //From this I need to get 2 rows in DB:
+            //199  WheelInfoIEEE 8  WheelSpeedFR   32   32
+            //199  WheelInfoIEEE 8  WheelSpeedFL    0   32
+
+            DBCHeader h = file.Headers.FirstOrDefault();
+            foreach (DBCRecord r in h.Records)
+            {
+                Console.WriteLine((int)h.HeaderType + " " + h.HeaderType + " " + r.Name + " - " + r.Value1);
+            }
         }
     }
 
@@ -82,7 +95,7 @@ BO_ 1020 GearBoxInfo: 1 GearBox
         }
 
 
-        List<DBCHeader> Headers { get; set; } = new List<DBCHeader>();
+        public List<DBCHeader> Headers { get; set; } = new List<DBCHeader>();
 
 
         public void Print()
