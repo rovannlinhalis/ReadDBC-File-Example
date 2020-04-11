@@ -58,7 +58,7 @@ BO_ 1020 GearBoxInfo: 1 GearBox
             DBCHeader h = file.Headers.FirstOrDefault();
             foreach (DBCRecord r in h.Records)
             {
-                Console.WriteLine((int)h.HeaderType + " " + h.HeaderType + " " + r.Name + " - " + r.Value1);
+                Console.WriteLine((int)h.HeaderType + " " + h.HeaderType + " " + h.NameID + " - " + r.Name + " - " + r.Value1A + " / " + r.Value1B) ;
             }
         }
     }
@@ -131,6 +131,8 @@ BO_ 1020 GearBoxInfo: 1 GearBox
         }
         public DBCHeaderType HeaderType { get; set; }
         public string Name { get; set; }
+        public string NameID { get => Name.Split(' ')[0]; }
+
         public List<DBCRecord> Records { get; set; } = new List<DBCRecord>();
     }
     public class DBCRecord
@@ -154,6 +156,8 @@ BO_ 1020 GearBoxInfo: 1 GearBox
 
         public string Name { get; set; }
         public string Value1 { get; set; }
+        public string Value1A { get => Value1.Split('|')[0]; }
+        public string Value1B { get => Value1.Split('|')[1].Split('@')[0]; }
         public string Value2 { get; set; }
         public string Value3 { get; set; }
         public string Value4 { get; set; }
